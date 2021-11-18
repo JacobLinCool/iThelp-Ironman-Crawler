@@ -1,1 +1,6 @@
-["mysql", "mongo", "redis", "postgres"]
+[
+    "mysql", 
+    "mongo", 
+    "redis", 
+    "postgres"
+]
