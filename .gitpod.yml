@@ -1,0 +1,5 @@
+tasks:
+  - name: Install Dependencies
+    init: npm config set fund false --global
+    command: npm install
+  
