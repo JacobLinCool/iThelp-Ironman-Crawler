@@ -5,13 +5,23 @@ const cheerio = require("cheerio");
 const Pool = require("./pool");
 const { std_clear } = require("./utils");
 
-async function crawl() {
-    if (!fs.existsSync(path.join(__dirname, "../data/list.json"))) {
+async function crawl(year) {
+    const list_path = path.resolve(__dirname, "..", "data", year.toString(), "list.json");
+    const article_path = path.resolve(__dirname, "..", "data", year.toString(), "article.json");
+
+    if (!fs.existsSync(list_path)) {
         console.log("list.json not found.");
         return;
     }
-    const list = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/list.json"), "utf8"));
+
+    if (!fs.existsSync(path.dirname(list_path))) {
+        fs.mkdirSync(path.dirname(list_path), { recursive: true });
+    }
+
+    const list = JSON.parse(fs.readFileSync(list_path, "utf8"));
     console.log(`${list.length} articles to crawl.`);
+
+    const StartTime = Date.now();
 
     let total = list.length,
         crawled = 0;
@@ -22,7 +32,7 @@ async function crawl() {
             crawlArticle(link).then((article) => {
                 std_clear();
                 process.stdout.write(
-                    "\033[93m" + `Crawled ${++crawled}/${total} articles. (${((crawled / total) * 100).toFixed(1)}%)` + "\033[m" + ` | ${article.title}`
+                    "\u001b[93m" + `Crawled ${++crawled}/${total} articles. (${((crawled / total) * 100).toFixed(1)}%)` + "\u001b[m" + ` | ${article.title}`
                 );
                 return article;
             })
@@ -31,9 +41,9 @@ async function crawl() {
     await pool.go();
 
     std_clear();
-    console.log("\033[92m" + `Crawled ${total}/${total} articles.` + "\033[m");
+    console.log("\u001b[92m" + `Crawled ${total}/${total} articles. (${((Date.now() - StartTime) / 1000).toFixed(0)}s)` + "\u001b[m");
 
-    fs.writeFileSync(path.resolve(__dirname, "..", "data", "articles.json"), JSON.stringify(pool.results));
+    fs.writeFileSync(article_path, JSON.stringify(pool.results));
 }
 
 async function crawlArticle(link) {
