@@ -2,6 +2,7 @@ tasks:
   - name: Install Dependencies
     command: |
       npm config set fund false --global
+      npm config set update-notifier false --global
       clear
       npm install
   
