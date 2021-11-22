@@ -1,6 +1,6 @@
 # iThelp Ironman Crawler
 
-iT 邦幫忙鐵人賽爬蟲。
+iT 邦幫忙鐵人賽爬蟲和一些沒什麼用的東西。
 
 ## 支援年分
 
