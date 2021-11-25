@@ -4,8 +4,9 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "prepare": "node script/prepare",
+        "prepare": "npm run help --silent",
         "start": "node crawler",
+        "help": "node script/help",
         "audit": "node script/audit",
         "flat": "node script/flat",
         "analyze": "node script/analyze"
