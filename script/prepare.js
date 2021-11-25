@@ -8,6 +8,7 @@ console.log(
         "",
         "再來，你就可以使用 \u001b[93m" + "npm run audit" + "\u001b[m 命令來來查看資料的資訊。",
         "或是 \u001b[93m" + "npm run flat" + "\u001b[m 命令來壓平資料 (轉換成 txt 格式)。",
+        "也可以用 \u001b[93m" + "npm run analyze" + "\u001b[m 命令來分析資料喔。",
         "",
         "你可以使用 \u001b[93m" + "npm run prepare" + "\u001b[m 命令來觀看這份指南。",
     ].join("\n")
